@@ -58,4 +58,13 @@ public class Room
             _exits.put("west", westRoom);
         }
     }
+
+    public String GetRoomDescription()
+    {
+        //TODO:
+        //- All available items in the room
+        //- All available exits to other rooms
+
+        return "Room description";
+    }
 }

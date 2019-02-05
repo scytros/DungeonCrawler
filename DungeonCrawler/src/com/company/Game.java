@@ -15,6 +15,9 @@ public class Game
         _scanner = new Scanner(System.in);
         _dungeon = new Dungeon();
         _player = new Player();
+        Room room = _dungeon.GetRooms().get(0);
+        _player.Move(room);
+        //TODO: nullpointer for some reason
 
         Run();
     }
@@ -33,7 +36,6 @@ public class Game
     private void HandleCommand(String input)
     {
         String[] splitArray = input.toLowerCase().trim().split("\\s+");
-        //TODO: make sure input has 1.command and 2.information
 
         if (splitArray.length == 1)
         {
@@ -99,15 +101,7 @@ public class Game
         switch (command)
         {
             case "north":
-                if (_player.GetCurrentRoom().GetPossibleExits().containsKey("north"))
-                {
-                    System.out.println("Going north!");
-                    //_player.GoToNextRoom();
-                }
-                else
-                {
-                    System.out.println("cant find");
-                }
+                System.out.println(_dungeon.GetRooms().get(_player.GetCurrentRoom().GetRoomId()).GetRoomId());
                 break;
             case "east":
                 System.out.println("Going east!");
@@ -150,7 +144,6 @@ public class Game
         //Show entrances and items in room
     }
 
-    //Quits the game
     private void HandleQuitCommand()
     {
         System.out.println("Thanks for playing!");

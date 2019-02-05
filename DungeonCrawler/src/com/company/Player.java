@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Player
 {
@@ -36,8 +35,10 @@ public class Player
         return false;
     }
 
-    public void GoToNextRoom(Map<String, Room> roomMap)
+    public void Move(Room room)
     {
+        _currentRoom = room;
+        System.out.println("Players current room changed to: " + _currentRoom.GetRoomId());
         //Go to next room based on direction
     }
 }

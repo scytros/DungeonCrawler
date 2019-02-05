@@ -7,6 +7,11 @@ public class Dungeon
 {
     private List<Room> _rooms;
 
+    public List<Room> GetRooms()
+    {
+        return _rooms;
+    }
+
     public Dungeon()
     {
         _rooms = new ArrayList<>();
