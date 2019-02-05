@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Room
 {
@@ -14,8 +16,18 @@ public class Room
     private int _id;
     private String _description;
 
-    private ArrayList<Item> _items = new ArrayList<Item>();
-    private HashMap<String, Room> _exits = new HashMap<String, Room>();
+    private List<Item> _items = new ArrayList<>();
+    private Map<String, Room> _exits = new HashMap<>();
+
+    public Map<String, Room> GetPossibleExits()
+    {
+        return _exits;
+    }
+
+    public int GetRoomId()
+    {
+        return _id;
+    }
 
     public Room(int id, String description)
     {
@@ -23,19 +35,27 @@ public class Room
         _description = description;
     }
 
-    public HashMap<String, Room> GetPossibleDirections()
+    //TODO: make this constructor only
+    public void SetExits(Room northRoom, Room eastRoom, Room southRoom, Room westRoom)
     {
-        return _exits;
-    }
+        if (northRoom != null)
+        {
+            _exits.put("north", northRoom);
+        }
 
-    public void SetExit(String direction, Room room)
-    {
-        _exits.put(direction, room);
-    }
+        if (eastRoom != null)
+        {
+            _exits.put("east", eastRoom);
+        }
 
-    public Room GetNextRoom()
-    {
-        //Return the next room
-        return null;
+        if (southRoom != null)
+        {
+            _exits.put("south", southRoom);
+        }
+
+        if (westRoom != null)
+        {
+            _exits.put("west", westRoom);
+        }
     }
 }

@@ -2,34 +2,19 @@ package com.company;
 
 import com.company.HelperClasses.Commands;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game
 {
-    private Player _player = new Player();
-    private Scanner _scanner = new Scanner(System.in);
-    private ArrayList<Room> _rooms = new ArrayList<Room>();
+    private Player _player;
+    private Scanner _scanner;
+    private Dungeon _dungeon;
 
     public Game()
     {
-        _rooms.add(new Room(0, "The starting area"));
-        _rooms.add(new Room(1, "The first room after the starting area"));
-        _rooms.add(new Room(2, "The second room after the starting area"));
-        _rooms.add(new Room(3, "The third room after the starting area"));
-        _rooms.add(new Room(4, "The fourth room after the starting area"));
-        _rooms.add(new Room(5, "The fifth room after the starting area"));
-        _rooms.add(new Room(6, "The sixth room after the starting area"));
-        _rooms.add(new Room(7, "The seventh room after the starting area"));
-        _rooms.add(new Room(8, "The eight room after the starting area"));
-        _rooms.add(new Room(9, "The ninth room after the starting area"));
-        _rooms.add(new Room(10, "The tenth room after the starting area"));
-
-        Room firstRoom = _rooms.get(0);
-        firstRoom.SetExit("north", _rooms.get(1));
-        firstRoom.SetExit("east", _rooms.get(6));
-        firstRoom.SetExit("south", _rooms.get(3));
-        firstRoom.SetExit("west", _rooms.get(2));
+        _scanner = new Scanner(System.in);
+        _dungeon = new Dungeon();
+        _player = new Player();
 
         Run();
     }
@@ -69,7 +54,8 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        } else if (splitArray.length == 2)
+        }
+        else if (splitArray.length == 2)
         {
             switch (splitArray[0])
             {
@@ -88,7 +74,8 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        } else
+        }
+        else
         {
             System.out.println("Please use one of the valid input commands.");
         }
@@ -112,7 +99,15 @@ public class Game
         switch (command)
         {
             case "north":
-                System.out.println("Going north!");
+                if (_player.GetCurrentRoom().GetPossibleExits().containsKey("north"))
+                {
+                    System.out.println("Going north!");
+                    //_player.GoToNextRoom();
+                }
+                else
+                {
+                    System.out.println("cant find");
+                }
                 break;
             case "east":
                 System.out.println("Going east!");
@@ -127,6 +122,7 @@ public class Game
                 System.out.println("Invalid direction!");
                 break;
         }
+
         //Check if east, west, north or south
         return false;
     }
