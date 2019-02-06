@@ -15,17 +15,15 @@ public class Game
         _scanner = new Scanner(System.in);
         _dungeon = new Dungeon();
         _player = new Player();
-        Room room = _dungeon.GetRooms().get(0);
-        _player.Move(room);
-        //TODO: nullpointer for some reason
+
+        _player.Move(_dungeon.GetRooms().get(0));
 
         Run();
     }
 
     private void Run()
     {
-        boolean keepPlaying = true;
-        while (keepPlaying)
+        while (true)
         {
             String _userInput = _scanner.nextLine();
 
@@ -89,41 +87,34 @@ public class Game
 
     private void HandleDropCommand(String itemName)
     {
+        if (_player.RemoveItemFromBackpack(itemName))
+        {
+            System.out.println(String.format("%s has been removed from backpack", itemName));
+        }
+        else
+        {
+            System.out.println(String.format("%s wasn't found in backpack", itemName));
+        }
     }
 
     private void HandleGetCommand(String itemName)
     {
-
+        _player.AddItemToBackpack(_player.GetCurrentRoom().GetItemByName(itemName));
     }
 
-    private boolean CheckRoomTravel(String command)
+    private void CheckRoomTravel(String command)
     {
-        switch (command)
-        {
-            case "north":
-                System.out.println(_dungeon.GetRooms().get(_player.GetCurrentRoom().GetRoomId()).GetRoomId());
-                break;
-            case "east":
-                System.out.println("Going east!");
-                break;
-            case "south":
-                System.out.println("Going south!");
-                break;
-            case "west":
-                System.out.println("Going west!");
-                break;
-            default:
-                System.out.println("Invalid direction!");
-                break;
-        }
-
-        //Check if east, west, north or south
-        return false;
+        _player.Move(_player.GetCurrentRoom().GetPossibleExits().get(command));
     }
 
     private void HandlePackCommand()
     {
-        //Show inventory
+        System.out.println("Backpack: ");
+
+        for (int i = 0; i < _player.GetAllItemsFromBackpack().size(); i++)
+        {
+            System.out.println("- " + _player.GetAllItemsFromBackpack().get(i));
+        }
     }
 
     private void HandleHelpCommand()
@@ -141,7 +132,7 @@ public class Game
 
     private void HandleLookCommand()
     {
-        //Show entrances and items in room
+        System.out.println(_player.GetCurrentRoom().GetRoomDescription());
     }
 
     private void HandleQuitCommand()

@@ -6,6 +6,7 @@ import java.util.List;
 public class Dungeon
 {
     private List<Room> _rooms;
+    private ItemList _itemList;
 
     public List<Room> GetRooms()
     {
@@ -14,6 +15,7 @@ public class Dungeon
 
     public Dungeon()
     {
+        _itemList = new ItemList();
         _rooms = new ArrayList<>();
 
         SetupDungeon();
@@ -22,10 +24,10 @@ public class Dungeon
     private void SetupDungeon()
     {
         _rooms.add(new Room(0, "The starting area"));
-        _rooms.add(new Room(1, "The first room after the starting area"));
-        _rooms.add(new Room(2, "The second room after the starting area"));
-        _rooms.add(new Room(3, "The third room after the starting area"));
-        _rooms.add(new Room(4, "The fourth room after the starting area"));
+        _rooms.add(new Room(1, "A weird looking cellar"));
+        _rooms.add(new Room(2, "A very dark and humid place"));
+        _rooms.add(new Room(3, "This place has a strange smell..."));
+        _rooms.add(new Room(4, ""));
         _rooms.add(new Room(5, "The fifth room after the starting area"));
         _rooms.add(new Room(6, "The sixth room after the starting area"));
         _rooms.add(new Room(7, "The seventh room after the starting area"));
@@ -44,6 +46,8 @@ public class Dungeon
         _rooms.get(8).SetExits(_rooms.get(5), _rooms.get(7), _rooms.get(10), _rooms.get(2));
         _rooms.get(9).SetExits(_rooms.get(7), null, null, _rooms.get(10));
         _rooms.get(10).SetExits(_rooms.get(8), _rooms.get(9), null, null);
+
+        _rooms.get(0).AddItems(_itemList.GetAvailableItems());
 
         //PrintDungeonMap();
     }

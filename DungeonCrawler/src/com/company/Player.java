@@ -18,27 +18,35 @@ public class Player
         return _currentRoom;
     }
 
-    public List<Item> GetAllItems()
+    public List<Item> GetAllItemsFromBackpack()
     {
         return _items;
     }
 
-    public boolean AddItemToBackpack(String itemName)
+    public boolean AddItemToBackpack(Item item)
     {
-        //Add item to backpack
-        return false;
+        _items.add(item);
+
+        return true;
     }
 
-    public boolean RemoveItemFromBackpack()
+    public boolean RemoveItemFromBackpack(String itemName)
     {
-        //Remove item from backpack
+        for (int i = 0; i < _items.size(); i++)
+        {
+            if (_items.get(i).GetName().equals(itemName))
+            {
+                _items.remove(_items.get(i));
+                return true;
+            }
+        }
+
         return false;
     }
 
     public void Move(Room room)
     {
         _currentRoom = room;
-        System.out.println("Players current room changed to: " + _currentRoom.GetRoomId());
-        //Go to next room based on direction
+        System.out.println(_currentRoom.GetRoomDescription());
     }
 }

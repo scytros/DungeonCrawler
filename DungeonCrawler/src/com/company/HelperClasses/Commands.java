@@ -2,6 +2,7 @@ package com.company.HelperClasses;
 
 public class Commands
 {
+    //TODO: Make non-static
     public static final String GO = "go";
     public static final String GET = "get";
     public static final String DROP = "drop";
