@@ -54,8 +54,7 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        }
-        else if (splitArray.length == 2)
+        } else if (splitArray.length == 2)
         {
             switch (splitArray[0])
             {
@@ -74,8 +73,7 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        }
-        else
+        } else
         {
             System.out.println("Please use one of the valid input commands.");
         }
@@ -83,15 +81,18 @@ public class Game
 
     private void HandleUseCommand(String itemName)
     {
+        //TODO: Use items (in room and in backpack)
     }
 
     private void HandleDropCommand(String itemName)
     {
-        if (_player.RemoveItemFromBackpack(itemName))
+        Item item = _player.RemoveItemFromBackpack(itemName);
+
+        if (item != null)
         {
+            _player.GetCurrentRoom().AddItem(item);
             System.out.println(String.format("%s has been removed from backpack", itemName));
-        }
-        else
+        } else
         {
             System.out.println(String.format("%s wasn't found in backpack", itemName));
         }
@@ -99,7 +100,18 @@ public class Game
 
     private void HandleGetCommand(String itemName)
     {
-        _player.AddItemToBackpack(_player.GetCurrentRoom().GetItemByName(itemName));
+        Item item = _player.GetCurrentRoom().GetItemByNameIfExists(itemName);
+
+        System.out.println("Item: " + item.GetName());
+//        boolean succes = _player.AddItemToBackpack(_player.GetCurrentRoom().GetItemByNameIfExists(itemName));
+//
+//        if (succes)
+//        {
+//            System.out.println("Added: " + itemName + " To Backpack");
+//        } else
+//        {
+//            System.out.println(itemName + " Wasn't found");
+//        }
     }
 
     private void CheckRoomTravel(String command)
@@ -113,7 +125,7 @@ public class Game
 
         for (int i = 0; i < _player.GetAllItemsFromBackpack().size(); i++)
         {
-            System.out.println("- " + _player.GetAllItemsFromBackpack().get(i));
+            System.out.println("- " + _player.GetAllItemsFromBackpack().get(i).GetName());
         }
     }
 

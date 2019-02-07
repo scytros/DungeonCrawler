@@ -18,18 +18,38 @@ public class Room
         return _exits;
     }
 
-    public Item GetItemByName(String itemName)
+    public Item GetItemByNameIfExists(String itemName)
     {
         for (int i = 0; i < _items.size(); i++)
         {
             if (_items.get(i).GetName().equals(itemName))
             {
-                _items.remove(_items.get(i));
-                return _items.get(i);
+                Item item = _items.get(i);
+                _items.remove(item);
+                return item;
             }
         }
 
-        return null; //TODO: Return that th item doesn't exist in the room
+        return null; //TODO: Return that the item doesn't exist in the room
+    }
+
+//    public boolean RemoveItem(String itemName)
+//    {
+//        for (int i = 0; i < _items.size(); i++)
+//        {
+//            if (_items.get(i).GetName().equals(itemName))
+//            {
+//                _items.remove(_items.get(i));
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+
+    public void AddItem(Item item)
+    {
+        _items.add(item);
     }
 
     public int GetRoomId()
@@ -39,8 +59,6 @@ public class Room
 
     public String GetRoomDescription()
     {
-        //TODO:
-        //- All available items in the room
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Currently In Room: ");
         stringBuilder.append(_id);

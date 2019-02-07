@@ -30,18 +30,19 @@ public class Player
         return true;
     }
 
-    public boolean RemoveItemFromBackpack(String itemName)
+    public Item RemoveItemFromBackpack(String itemName)
     {
         for (int i = 0; i < _items.size(); i++)
         {
             if (_items.get(i).GetName().equals(itemName))
             {
-                _items.remove(_items.get(i));
-                return true;
+                Item item = _items.get(i);
+                _items.remove(item);
+                return item;
             }
         }
 
-        return false;
+        return null;
     }
 
     public void Move(Room room)

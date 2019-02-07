@@ -12,15 +12,6 @@ public class ItemList
         return _availableItems;
     }
 
-    public enum Items
-    {
-        ROCK,
-        STICK,
-        IDOL,
-        MAGICBONE,
-        TPSTONE
-    }
-
     public ItemList()
     {
         _availableItems = new ArrayList<>();
@@ -41,24 +32,5 @@ public class ItemList
         _availableItems.add(idol);
         _availableItems.add(magicbone);
         _availableItems.add(tpstone);
-    }
-
-    private Item GetItem(Items items)
-    {
-        switch (items)
-        {
-            case ROCK:
-                return _availableItems.get(0);
-            case STICK:
-                return _availableItems.get(1);
-            case IDOL:
-                return _availableItems.get(2);
-            case MAGICBONE:
-                return _availableItems.get(3);
-            case TPSTONE:
-                return _availableItems.get(4);
-        }
-
-        return null;
     }
 }
