@@ -18,7 +18,17 @@ public class Room
         return _exits;
     }
 
-    public Item GetItemByNameIfExists(String itemName)
+    public boolean CheckValidDirection(String direction)
+    {
+        if (_exits.containsKey(direction))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Item TakeItem(String itemName)
     {
         for (int i = 0; i < _items.size(); i++)
         {
@@ -30,26 +40,18 @@ public class Room
             }
         }
 
-        return null; //TODO: Return that the item doesn't exist in the room
+        return null;
     }
 
-//    public boolean RemoveItem(String itemName)
-//    {
-//        for (int i = 0; i < _items.size(); i++)
-//        {
-//            if (_items.get(i).GetName().equals(itemName))
-//            {
-//                _items.remove(_items.get(i));
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
-    public void AddItem(Item item)
+    public boolean PutItem(Item item)
     {
-        _items.add(item);
+        if (item != null)
+        {
+            _items.add(item);
+            return true;
+        }
+
+        return false;
     }
 
     public int GetRoomId()
@@ -60,22 +62,22 @@ public class Room
     public String GetRoomDescription()
     {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Currently In Room: ");
+        stringBuilder.append("Currently in room: ");
         stringBuilder.append(_id);
         stringBuilder.append("\nDescription: ");
         stringBuilder.append(_description);
-        stringBuilder.append("\nPossible Exits: ");
+        stringBuilder.append("\nPossible exits: ");
 
         for (String key : _exits.keySet())
         {
             stringBuilder.append(key);
             stringBuilder.append(": ");
-            stringBuilder.append("Room ");
+            stringBuilder.append("room ");
             stringBuilder.append(_exits.get(key).GetRoomId());
             stringBuilder.append(", ");
         }
 
-        stringBuilder.append("\nItems In Room: ");
+        stringBuilder.append("\nItems in room: ");
 
         for (int i = 0; i < _items.size(); i++)
         {

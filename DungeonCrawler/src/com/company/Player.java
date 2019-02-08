@@ -8,9 +8,16 @@ public class Player
     private Room _currentRoom;
     private List<Item> _items;
 
-    public Player()
+    public Player(Room startingRoom)
     {
         _items = new ArrayList<>();
+        SetRoom(startingRoom);
+    }
+
+    private void SetRoom(Room room)
+    {
+        _currentRoom = room;
+        System.out.println(room.GetRoomDescription());
     }
 
     public Room GetCurrentRoom()
@@ -25,9 +32,13 @@ public class Player
 
     public boolean AddItemToBackpack(Item item)
     {
-        _items.add(item);
+        if (item != null)
+        {
+            _items.add(item);
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     public Item RemoveItemFromBackpack(String itemName)
@@ -45,9 +56,14 @@ public class Player
         return null;
     }
 
-    public void Move(Room room)
+    public boolean Move(String direction)
     {
-        _currentRoom = room;
-        System.out.println(_currentRoom.GetRoomDescription());
+        if (_currentRoom.GetPossibleExits().containsKey(direction))
+        {
+            SetRoom(_currentRoom.GetPossibleExits().get(direction));
+            return true;
+        }
+
+        return false;
     }
 }

@@ -14,9 +14,7 @@ public class Game
     {
         _scanner = new Scanner(System.in);
         _dungeon = new Dungeon();
-        _player = new Player();
-
-        _player.Move(_dungeon.GetRooms().get(0));
+        _player = new Player(_dungeon.GetRooms().get(0));
 
         Run();
     }
@@ -54,7 +52,8 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        } else if (splitArray.length == 2)
+        }
+        else if (splitArray.length == 2)
         {
             switch (splitArray[0])
             {
@@ -73,7 +72,8 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        } else
+        }
+        else
         {
             System.out.println("Please use one of the valid input commands.");
         }
@@ -82,6 +82,10 @@ public class Game
     private void HandleUseCommand(String itemName)
     {
         //TODO: Use items (in room and in backpack)
+        //- Check if item in room and use it if it is (remove)
+        //- Check if item in backpack and use it if it is (remove)
+
+        //if (_player.GetCurrentRoom().)
     }
 
     private void HandleDropCommand(String itemName)
@@ -90,9 +94,10 @@ public class Game
 
         if (item != null)
         {
-            _player.GetCurrentRoom().AddItem(item);
+            _player.GetCurrentRoom().PutItem(item);
             System.out.println(String.format("%s has been removed from backpack", itemName));
-        } else
+        }
+        else
         {
             System.out.println(String.format("%s wasn't found in backpack", itemName));
         }
@@ -100,23 +105,29 @@ public class Game
 
     private void HandleGetCommand(String itemName)
     {
-        Item item = _player.GetCurrentRoom().GetItemByNameIfExists(itemName);
+        Item item = _player.GetCurrentRoom().TakeItem(itemName);
 
-        System.out.println("Item: " + item.GetName());
-//        boolean succes = _player.AddItemToBackpack(_player.GetCurrentRoom().GetItemByNameIfExists(itemName));
-//
-//        if (succes)
-//        {
-//            System.out.println("Added: " + itemName + " To Backpack");
-//        } else
-//        {
-//            System.out.println(itemName + " Wasn't found");
-//        }
+        boolean succes = _player.AddItemToBackpack(item);
+
+        if (succes)
+        {
+            System.out.println("Added " + itemName + " to backpack");
+        }
+        else
+        {
+            System.out.println(itemName + " wasn't found");
+        }
     }
 
     private void CheckRoomTravel(String command)
     {
-        _player.Move(_player.GetCurrentRoom().GetPossibleExits().get(command));
+        //_player.Move(_player.GetCurrentRoom().GetPossibleExits().get(command));
+        boolean succes = _player.Move(command);
+
+        if (!succes)
+        {
+            System.out.println("Not a valid direction, or direction is not available");
+        }
     }
 
     private void HandlePackCommand()

@@ -1,6 +1,6 @@
 package com.company;
 
-public class Item
+public class Item implements IUse
 {
     private String _description;
     private String _usageText;
@@ -17,4 +17,11 @@ public class Item
         _usageText = usageText;
         _description = description;
     }
+
+    @Override
+    public void Use()
+    {
+        System.out.println(_name + " has been used!");
+    }
 }
+
