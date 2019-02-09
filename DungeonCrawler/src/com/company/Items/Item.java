@@ -1,6 +1,6 @@
-package com.company;
+package com.company.Items;
 
-public class Item implements IUse
+public class Item
 {
     private String _description;
     private String _usageText;
@@ -18,10 +18,8 @@ public class Item implements IUse
         _description = description;
     }
 
-    @Override
+    //Something the item does
     public void Use()
     {
-        System.out.println(_name + " has been used!");
     }
 }
-

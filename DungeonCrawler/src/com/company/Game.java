@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.HelperClasses.Commands;
+import com.company.Items.Item;
 
 import java.util.Scanner;
 
@@ -79,20 +80,18 @@ public class Game
 
     private void HandleUseCommand(String itemName)
     {
-        //TODO: Use items (in room and in backpack)
-        //- Check if item in room and use it if it is (remove)
-        //- Check if item in backpack and use it if it is (remove)
-
         Item playerItem = _player.ItemStorage().GetItemByName(itemName);
+        Item roomItem = _player.GetCurrentRoom().ItemStorage().GetItemByName(itemName);
 
         if (playerItem != null)
         {
             playerItem.Use();
-            //TODO: Remove after use?
-            System.out.println("has " + itemName);
+        } else if (roomItem != null)
+        {
+            roomItem.Use();
         } else
         {
-            System.out.println("doesn't have " + itemName);
+            System.out.println(itemName + " wasn't found");
         }
     }
 

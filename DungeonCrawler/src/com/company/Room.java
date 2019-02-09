@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Items.Item;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +74,6 @@ public class Room
         }
     }
 
-    //TODO: make this constructor only
     //Sets the possible exits to others rooms
     public void SetExits(Room northRoom, Room eastRoom, Room southRoom, Room westRoom)
     {
