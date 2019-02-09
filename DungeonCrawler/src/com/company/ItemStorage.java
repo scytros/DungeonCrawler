@@ -1,32 +1,29 @@
-package com.company.HelperClasses;
-
-import com.company.Item;
+package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfItems
+public class ItemStorage
 {
     private List<Item> _items;
 
-    public ListOfItems()
+    public ItemStorage()
     {
         _items = new ArrayList<>();
     }
 
     //TODO: Optimise this search
-    //Checks if
-    public boolean HasItem(String itemName)
+    public Item GetItemByName(String itemName)
     {
         for (int i = 0; i < _items.size(); i++)
         {
             if (_items.get(i).GetName().equals(itemName))
             {
-                return true;
+                return _items.get(i);
             }
         }
 
-        return false;
+        return null;
     }
 
     //Puts an item in the item collection
@@ -44,16 +41,20 @@ public class ListOfItems
     //Returns an item based on name and removes it from this collection
     public Item TakeItem(String itemName)
     {
-        for (int i = 0; i < _items.size(); i++)
+        Item item = GetItemByName(itemName);
+
+        if (item != null)
         {
-            if (_items.get(i).GetName().equals(itemName))
-            {
-                Item item = _items.get(i);
-                _items.remove(item);
-                return item;
-            }
+            _items.remove(item);
+            return item;
         }
 
         return null;
+    }
+
+    //Returns the entire item collection
+    public List<Item> Storage()
+    {
+        return _items;
     }
 }

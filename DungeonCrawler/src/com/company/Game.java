@@ -52,8 +52,7 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        }
-        else if (splitArray.length == 2)
+        } else if (splitArray.length == 2)
         {
             switch (splitArray[0])
             {
@@ -72,8 +71,7 @@ public class Game
                 default:
                     System.out.println("Please use one of the valid input commands.");
             }
-        }
-        else
+        } else
         {
             System.out.println("Please use one of the valid input commands.");
         }
@@ -85,22 +83,28 @@ public class Game
         //- Check if item in room and use it if it is (remove)
         //- Check if item in backpack and use it if it is (remove)
 
-        if (_player.GetStuff().HasItem(itemName))
+        Item playerItem = _player.ItemStorage().GetItemByName(itemName);
+
+        if (playerItem != null)
         {
+            playerItem.Use();
+            //TODO: Remove after use?
             System.out.println("has " + itemName);
+        } else
+        {
+            System.out.println("doesn't have " + itemName);
         }
     }
 
     private void HandleDropCommand(String itemName)
     {
-        Item item = _player.RemoveItemFromBackpack(itemName);
+        Item item = _player.ItemStorage().TakeItem(itemName);
 
         if (item != null)
         {
-            _player.GetCurrentRoom().PutItem(item);
+            _player.GetCurrentRoom().ItemStorage().PutItem(item);
             System.out.println(String.format("%s has been removed from backpack", itemName));
-        }
-        else
+        } else
         {
             System.out.println(String.format("%s wasn't found in backpack", itemName));
         }
@@ -108,15 +112,14 @@ public class Game
 
     private void HandleGetCommand(String itemName)
     {
-        Item item = _player.GetCurrentRoom().TakeItem(itemName);
+        Item item = _player.GetCurrentRoom().ItemStorage().TakeItem(itemName);
 
-        boolean succes = _player.AddItemToBackpack(item);
+        boolean succes = _player.ItemStorage().PutItem(item);
 
         if (succes)
         {
             System.out.println("Added " + itemName + " to backpack");
-        }
-        else
+        } else
         {
             System.out.println(itemName + " wasn't found");
         }
@@ -137,19 +140,19 @@ public class Game
     {
         System.out.println("Backpack: ");
 
-        for (int i = 0; i < _player.GetAllItemsFromBackpack().size(); i++)
+        for (int i = 0; i < _player.ItemStorage().Storage().size(); i++)
         {
-            System.out.println("- " + _player.GetAllItemsFromBackpack().get(i).GetName());
+            System.out.println("- " + _player.ItemStorage().Storage().get(i).GetName());
         }
     }
 
     private void HandleHelpCommand()
     {
         System.out.println("\nAvailable Commands:");
-        System.out.println("1. 'go': moves the player to another room. (if possible)");
-        System.out.println("2. 'get': Gets an item in the current room. (if possible)");
-        System.out.println("3. 'drop': Drops an item. (if possible)");
-        System.out.println("4. 'use': Uses an item. (if possible)");
+        System.out.println("1. 'go <value> (north, east, south, west)': moves the player to another room in the given direction. (if possible)");
+        System.out.println("2. 'get <value> (name of the item to pickup)': Gets an item in the current room. (if possible)");
+        System.out.println("3. 'drop <value> (name of the item to drop)': Drops an item. (if possible)");
+        System.out.println("4. 'use <value> (name of the item to use)': Uses an item. (if possible)");
         System.out.println("5. 'pack': Shows all available items in the players backpack");
         System.out.println("6. 'help': Shows all available commands");
         System.out.println("7. 'look': Tells the player what options there are in the current room");

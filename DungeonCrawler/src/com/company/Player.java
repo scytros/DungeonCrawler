@@ -1,25 +1,20 @@
 package com.company;
 
-import com.company.HelperClasses.ListOfItems;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Player
 {
     private Room _currentRoom;
-    private ListOfItems _listOfItems;
+    private ItemStorage _itemStorage;
 
     public Player(Room startingRoom)
     {
-        _listOfItems = new ListOfItems();
+        _itemStorage = new ItemStorage();
 
         SetRoom(startingRoom);
     }
 
-    public ListOfItems GetStuff()
+    public ItemStorage ItemStorage()
     {
-        return _listOfItems;
+        return _itemStorage;
     }
 
     private void SetRoom(Room room)
