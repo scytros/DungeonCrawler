@@ -14,6 +14,6 @@ public class Rock extends Item
     {
         super.Use();
 
-        System.out.println("*rumble*");
+        System.out.println(super.GetUsageText());
     }
 }

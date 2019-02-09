@@ -14,6 +14,6 @@ public class MagicBone extends Item
     {
         super.Use();
 
-        System.out.println("*magic bone shakes.* a thought appears: 'bring this back to the starting area'.");
+        System.out.println(super.GetUsageText());
     }
 }

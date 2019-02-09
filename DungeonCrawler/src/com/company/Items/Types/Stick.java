@@ -14,6 +14,6 @@ public class Stick extends Item
     {
         super.Use();
 
-        System.out.println("*crack*");
+        System.out.println(super.GetUsageText());
     }
 }

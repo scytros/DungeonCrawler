@@ -65,15 +65,6 @@ public class Room
         return stringBuilder.toString();
     }
 
-    //Adds the starting items to the rooms
-    public void AddItems(List<Item> items)
-    {
-        for (int i = 0; i < items.size(); i++)
-        {
-            _itemStorage.Storage().add(items.get(i));
-        }
-    }
-
     //Sets the possible exits to others rooms
     public void SetExits(Room northRoom, Room eastRoom, Room southRoom, Room westRoom)
     {

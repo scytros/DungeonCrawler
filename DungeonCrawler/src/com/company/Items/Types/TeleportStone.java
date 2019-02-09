@@ -14,6 +14,6 @@ public class TeleportStone extends Item
     {
         super.Use();
 
-        System.out.println("It's not going to be that simple :), you can walk back to the starting area");
+        System.out.println(super.GetUsageText());
     }
 }

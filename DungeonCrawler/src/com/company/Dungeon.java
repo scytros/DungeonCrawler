@@ -49,7 +49,11 @@ public class Dungeon
         _rooms.get(9).SetExits(_rooms.get(7), null, null, _rooms.get(10));
         _rooms.get(10).SetExits(_rooms.get(8), _rooms.get(9), null, null);
 
-        _rooms.get(0).AddItems(_itemList.GetAvailableItems());
+        _rooms.get(0).ItemStorage().PutItem(_itemList.GetSpecificItem(ItemList.ItemTypes.IDOL));
+        _rooms.get(1).ItemStorage().PutItem(_itemList.GetSpecificItem(ItemList.ItemTypes.STICK));
+        _rooms.get(3).ItemStorage().PutItem(_itemList.GetSpecificItem(ItemList.ItemTypes.ROCK));
+        _rooms.get(8).ItemStorage().PutItem(_itemList.GetSpecificItem(ItemList.ItemTypes.TELEPORTSTONE));
+        _rooms.get(10).ItemStorage().PutItem(_itemList.GetSpecificItem(ItemList.ItemTypes.MAGICBONE));
         //TODO:
         //- Room 1 has a stick
         //- Room 4 has a doll

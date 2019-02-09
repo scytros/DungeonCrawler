@@ -14,6 +14,6 @@ public class Idol extends Item
     {
         super.Use();
 
-        System.out.println("*a message appears* find an item and bring it back to this area...");
+        System.out.println(super.GetUsageText());
     }
 }

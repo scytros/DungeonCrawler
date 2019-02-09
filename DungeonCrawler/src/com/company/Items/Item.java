@@ -11,6 +11,11 @@ public class Item
         return _name;
     }
 
+    public String GetUsageText()
+    {
+        return _usageText;
+    }
+
     public Item(String name, String usageText, String description)
     {
         _name = name;
