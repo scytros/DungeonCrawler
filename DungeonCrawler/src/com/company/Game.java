@@ -85,7 +85,10 @@ public class Game
         //- Check if item in room and use it if it is (remove)
         //- Check if item in backpack and use it if it is (remove)
 
-        //if (_player.GetCurrentRoom().)
+        if (_player.GetStuff().HasItem(itemName))
+        {
+            System.out.println("has " + itemName);
+        }
     }
 
     private void HandleDropCommand(String itemName)
